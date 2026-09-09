@@ -8,7 +8,7 @@ Git과 GitHub, Python 가상환경, 환경변수, Markdown 문서를 한 저장�
 2. VS Code의 `Clone Git Repository...`로 본인 Fork를 Clone합니다.
 3. `week2-{GITHUB_ID}` 형식의 branch를 만듭니다.
 4. `participants/_template.md`를 복사해 `participants/{GITHUB_ID}.md`를 만듭니다.
-5. 노션 자료를 따라가며 같은 기록 파일을 채웁니다.
+5. 복사한 파일에 GitHub ID와 아무 문장이나 한 줄 적습니다.
 6. 변경을 Commit하고 본인 Fork에 Push한 뒤 Pull Request를 만듭니다.
 
 `{GITHUB_ID}`는 중괄호까지 포함해 입력하는 문자가 아니라 본인의 실제 GitHub 아이디로 바꿉니다.
@@ -49,7 +49,7 @@ python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-`.env`의 `OPENAI_API_KEY`에는 발급받은 Key를 입력합니다. 실제 Key를 코드, 기록 파일, Pull Request, 캡처 화면에 넣지 않습니다.
+`.env`의 `OPENAI_API_KEY`에는 발급받은 Key를 입력합니다. 실제 Key를 코드, Pull Request, 캡처 화면에 넣지 않습니다.
 
 ## 실행
 
