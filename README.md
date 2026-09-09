@@ -1,19 +1,18 @@
 # HATESLOP 5기 2회차 실습
 
-Git과 GitHub, Python 가상환경, 환경변수, Markdown 문서를 한 저장소에서 차례로 연습합니다. 마지막에는 OpenAI API를 한 번 호출하고, Antigravity와 함께 작은 AI 프로토타입을 만듭니다.
+Git과 GitHub, Python 가상환경, 환경변수, Markdown 문서를 한 저장소에서 차례로 연습합니다. 마지막에는 OpenAI API를 한 번 호출하고, Antigravity 같은 에이전트와 함께 작은 AI 프로토타입을 만듭니다.
 
 ## 저장소 사용 순서
 
 1. 이 저장소를 본인 GitHub 계정으로 Fork합니다.
 2. VS Code의 `Clone Git Repository...`로 본인 Fork를 Clone합니다.
 3. `week2-{GITHUB_ID}` 형식의 branch를 만듭니다.
-4. `participants/_template.md`를 복사해 `participants/{GITHUB_ID}.md`를 만듭니다.
-5. 복사한 파일에 GitHub ID와 아무 문장이나 한 줄 적습니다.
-6. 변경을 Commit하고 본인 Fork에 Push한 뒤 **Git 연습 Pull Request**를 만듭니다.
+4. `projects/{GITHUB_ID}/` 폴더 안에 나만의 AI 프로토타입을 만듭니다.
+5. 변경을 Commit하고 본인 Fork에 Push한 뒤 Pull Request를 만듭니다.
 
 `{GITHUB_ID}`는 중괄호까지 포함해 입력하는 문자가 아니라 본인의 실제 GitHub 아이디로 바꿉니다.
 
-Git 연습 Pull Request는 Fork·Branch·Commit·Push 흐름을 확인하는 용도입니다. 수업 중 안내에 따라 마무리하며, 실제 과제 제출은 아래의 `assignment-{GITHUB_ID}` branch에서 별도의 Pull Request로 진행합니다.
+`week2-{GITHUB_ID}` branch 하나를 세션 내내 사용합니다. 폴더는 결과물을 구분하기 위한 것이고, branch는 Commit과 Pull Request를 만들기 위한 작업선입니다.
 
 ## 프로젝트 구조
 
@@ -21,14 +20,15 @@ Git 연습 Pull Request는 Fork·Branch·Commit·Push 흐름을 확인하는 용
 .
 ├── .github/
 │   └── pull_request_template.md
-├── participants/
-│   └── _template.md
+├── projects/
+│   ├── README.md
+│   └── {GITHUB_ID}/           # 과제에서 새로 만듦
+│       ├── IDEA.md
+│       └── app.py
 ├── .env.example
 ├── .gitignore
 ├── main.py
-├── app.py                  # 과제에서 새로 만듦
 ├── requirements.txt
-├── TASK.md
 └── README.md
 ```
 
@@ -71,20 +71,24 @@ git status --short
 
 `.env`는 첫 번째 명령의 결과에 나타나고, 두 번째 명령의 변경 목록에는 나타나지 않아야 합니다.
 
-## Antigravity AI 프로토타입 과제
+## AI 프로토타입 과제
 
-기본 API 호출이 확인되면 `main`에서 새 과제 branch를 만듭니다.
+기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더를 만듭니다. 그 안에 `IDEA.md`와 `app.py`를 둡니다.
 
-```bash
-git switch main
-git pull origin main
-git switch -c assignment-{GITHUB_ID}
+`IDEA.md`에는 만들고 싶은 것을 한두 문장으로 적습니다. 예를 들어 “사용자가 적은 여행 취향을 받아 1일 여행 코스를 추천해 주는 서비스”처럼 시작하면 됩니다.
+
+Antigravity에서 저장소 폴더를 열고 아래처럼 요청합니다.
+
+```text
+projects/{GITHUB_ID}/IDEA.md를 읽고,
+이 폴더 안에 간단한 Streamlit AI 프로토타입을 만들어 주세요.
+API Key는 프로젝트 최상위의 .env에서만 읽고 코드에 넣지 마세요.
 ```
 
-`TASK.md`에는 **AI 아이디어 구체화 도우미**를 만드는 목표·제약·완료 조건이 들어 있습니다. Antigravity에게 먼저 계획만 요청하고, 계획을 확인한 뒤 구현을 승인합니다. `app.py`를 만든 뒤에는 다음 명령으로 직접 실행합니다.
+완성 뒤에는 직접 실행합니다.
 
 ```bash
-streamlit run app.py
+streamlit run projects/{GITHUB_ID}/app.py
 ```
 
-마지막으로 `app.py`, `README.md`, `requirements.txt`의 변경을 검토해 Commit·Push하고, `assignment-{GITHUB_ID}` branch로 **과제 Pull Request**를 만듭니다. API Key와 `.env` 내용은 Pull Request나 화면 캡처에 포함하지 않습니다.
+변경 내용을 확인한 뒤 `projects/{GITHUB_ID}`를 Commit·Push하고 Pull Request를 만듭니다. API Key와 `.env` 내용은 Pull Request나 화면 캡처에 포함하지 않습니다.
