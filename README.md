@@ -7,12 +7,21 @@ Git과 GitHub, Python 가상환경, 환경변수, Markdown 문서를 한 저장�
 1. 이 저장소를 본인 GitHub 계정으로 Fork합니다.
 2. VS Code의 `Clone Git Repository...`로 본인 Fork를 Clone합니다.
 3. `week2-{GITHUB_ID}` 형식의 branch를 만듭니다.
-4. `projects/{GITHUB_ID}/` 폴더 안에 나만의 AI 프로토타입을 만듭니다.
-5. 변경을 Commit하고 본인 Fork에 Push한 뒤 Pull Request를 만듭니다.
+4. `projects/{GITHUB_ID}/IDEA.md`에 만들고 싶은 AI 프로토타입을 한두 문장으로 적습니다.
+5. `IDEA.md`만 Commit·Push하고, GitHub 연결을 확인하는 첫 Pull Request를 만듭니다.
+6. 운영진이 첫 Pull Request를 Merge하거나 Close하면, 새 `assignment-{GITHUB_ID}` branch를 만듭니다.
+7. 새 branch에서 AI 프로토타입을 만들고, 두 번째 Pull Request로 제출합니다.
 
 `{GITHUB_ID}`는 중괄호까지 포함해 입력하는 문자가 아니라 본인의 실제 GitHub 아이디로 바꿉니다.
 
-`week2-{GITHUB_ID}` branch 하나를 세션 내내 사용합니다. 폴더는 결과물을 구분하기 위한 것이고, branch는 Commit과 Pull Request를 만들기 위한 작업선입니다.
+첫 Pull Request는 Git과 GitHub 연결을 확인하는 연습이고, 두 번째 Pull Request는 과제 제출입니다. 폴더는 결과물을 구분하기 위한 것이고, branch는 서로 다른 Pull Request를 분리하는 작업선입니다.
+
+첫 Pull Request가 정리된 뒤에는 아래 명령으로 과제 branch를 만듭니다.
+
+```bash
+git switch week2-{GITHUB_ID}
+git switch -c assignment-{GITHUB_ID}
+```
 
 ## 프로젝트 구조
 
@@ -73,7 +82,7 @@ git status --short
 
 ## AI 프로토타입 과제
 
-기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더를 만듭니다. 그 안에 `IDEA.md`와 `app.py`를 둡니다.
+첫 Pull Request가 정리된 뒤 과제 branch로 이동합니다. 기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더 안에서 `IDEA.md`와 `app.py`를 완성합니다.
 
 `IDEA.md`에는 만들고 싶은 것을 한두 문장으로 적습니다. 예를 들어 “사용자가 적은 여행 취향을 받아 1일 여행 코스를 추천해 주는 서비스”처럼 시작하면 됩니다.
 
@@ -91,4 +100,10 @@ API Key는 프로젝트 최상위의 .env에서만 읽고 코드에 넣지 마�
 streamlit run projects/{GITHUB_ID}/app.py
 ```
 
-변경 내용을 확인한 뒤 `projects/{GITHUB_ID}`를 Commit·Push하고 Pull Request를 만듭니다. API Key와 `.env` 내용은 Pull Request나 화면 캡처에 포함하지 않습니다.
+변경 내용을 확인한 뒤 `projects/{GITHUB_ID}`를 Commit하고 아래처럼 과제 branch를 Push합니다.
+
+```bash
+git push -u origin assignment-{GITHUB_ID}
+```
+
+GitHub에서 `assignment-{GITHUB_ID}` branch로 두 번째 Pull Request를 만듭니다. API Key와 `.env` 내용은 Pull Request나 화면 캡처에 포함하지 않습니다.
