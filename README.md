@@ -35,7 +35,10 @@ git switch -c assignment-{GITHUB_ID}
 ├── .env.example
 ├── .gitignore
 ├── main.py
+├── PROJECT_HARNESS.md
 ├── requirements.txt
+├── tools/
+│   └── check_submission.py
 └── README.md
 ```
 
@@ -83,6 +86,7 @@ git status --short
 Antigravity에서 저장소 폴더를 열고 아래처럼 요청합니다.
 
 ```text
+먼저 저장소 최상위의 PROJECT_HARNESS.md를 읽고 지켜 주세요.
 projects/{GITHUB_ID}/IDEA.md를 읽고,
 이 폴더 안에 간단한 대화형 AI 프로토타입을 만들어 주세요.
 `python projects/{GITHUB_ID}/app.py`로 실행할 수 있어야 합니다.
