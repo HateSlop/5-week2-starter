@@ -31,7 +31,9 @@ git switch -c assignment-{GITHUB_ID}
 │   ├── README.md
 │   └── {GITHUB_ID}/           # 과제에서 새로 만듦
 │       ├── IDEA.md
-│       └── app.py
+│       ├── app.py
+│       ├── README.md           # 선택
+│       └── output/             # 선택: 결과 화면 스크린샷만 1~2장
 ├── .env.example
 ├── .gitignore
 ├── main.py
@@ -79,7 +81,7 @@ git status --short
 
 ## AI 프로토타입 과제
 
-첫 Pull Request가 정리된 뒤 과제 branch로 이동합니다. 기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더 안에서 `IDEA.md`와 `app.py`를 완성합니다.
+첫 Pull Request가 정리된 뒤 과제 branch로 이동합니다. 기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더 안에서 `IDEA.md`와 `app.py`를 완성합니다. 이 두 파일이 필수 과제이자 코드 리뷰 대상입니다.
 
 `IDEA.md`에는 만들고 싶은 것을 한두 문장으로 적습니다. 예를 들어 “사용자가 적은 여행 취향을 받아 1일 여행 코스를 추천해 주는 서비스”처럼 시작하면 됩니다.
 
@@ -106,3 +108,5 @@ git push -u origin assignment-{GITHUB_ID}
 ```
 
 GitHub에서 `assignment-{GITHUB_ID}` branch로 두 번째 Pull Request를 만듭니다. API Key와 `.env` 내용은 Pull Request나 화면 캡처에 포함하지 않습니다.
+
+결과를 조금 더 보여 주고 싶다면 선택으로 짧은 `README.md`와 `output/` 폴더를 추가할 수 있습니다. `output/`에는 실행 결과 화면 스크린샷만 1~2장 넣습니다. 에이전트로 웹앱처럼 크게 확장한 결과물은 이 Pull Request에 통째로 넣지 말고 별도 개인 저장소에서 진행합니다. 그 링크는 `README.md`에 소개만 할 수 있습니다.

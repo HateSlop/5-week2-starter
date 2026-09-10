@@ -5,7 +5,9 @@ import re
 from pathlib import Path
 
 
-ALLOWED_FILES = {"IDEA.md", "app.py", "README.md"}
+ROOT_FILES = {"IDEA.md", "app.py", "README.md"}
+OUTPUT_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
+MAX_OUTPUT_IMAGES = 2
 FORBIDDEN_MARKERS = (
     "streamlit",
     "flask",
@@ -31,10 +33,31 @@ def main() -> int:
     if not project_dir.is_dir():
         errors.append(f"제출 폴더가 없습니다: projects/{github_id}/")
     else:
-        files = [path for path in project_dir.rglob("*") if path.is_file()]
-        for path in files:
-            if path.relative_to(project_dir).as_posix() not in ALLOWED_FILES:
+        output_images: list[Path] = []
+        for path in project_dir.rglob("*"):
+            relative_path = path.relative_to(project_dir)
+
+            if path.is_dir() and relative_path != Path("output"):
+                errors.append(f"허용하지 않는 폴더입니다: {path.relative_to(root)}")
+
+            if not path.is_file():
+                continue
+
+            is_root_file = relative_path.parent == Path(".") and relative_path.name in ROOT_FILES
+            is_output_image = (
+                relative_path.parent == Path("output")
+                and relative_path.suffix.lower() in OUTPUT_EXTENSIONS
+            )
+
+            if is_output_image:
+                output_images.append(path)
+            elif not is_root_file:
                 errors.append(f"허용하지 않는 파일입니다: {path.relative_to(root)}")
+
+        if len(output_images) > MAX_OUTPUT_IMAGES:
+            errors.append(
+                f"output/에는 결과 스크린샷을 {MAX_OUTPUT_IMAGES}장까지만 넣을 수 있습니다."
+            )
 
         idea_path = project_dir / "IDEA.md"
         app_path = project_dir / "app.py"
