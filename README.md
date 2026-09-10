@@ -43,22 +43,18 @@ git switch -c assignment-{GITHUB_ID}
 
 ## Python 환경 준비
 
-### Windows PowerShell
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-Copy-Item .env.example .env
-```
-
-### macOS zsh
+수업에서는 Conda의 `hateslop-week2` 환경을 사용합니다.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
+conda create -n hateslop-week2 python=3.12
+conda activate hateslop-week2
+pip install -r requirements.txt
+```
+
+Windows에서는 아래 명령으로 `.env`를 만들고, macOS에서는 `cp .env.example .env`를 사용합니다.
+
+```powershell
+Copy-Item .env.example .env
 ```
 
 `.env`의 `OPENAI_API_KEY`에는 발급받은 Key를 입력합니다. 실제 Key를 코드, Pull Request, 캡처 화면에 넣지 않습니다.
