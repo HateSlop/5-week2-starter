@@ -38,7 +38,6 @@ git switch -c assignment-{GITHUB_ID}
 ├── .gitignore
 ├── main.py
 ├── requirements.txt
-├── requirements-prototype.txt
 └── README.md
 ```
 
@@ -84,12 +83,6 @@ git status --short
 ## AI 프로토타입 과제
 
 첫 Pull Request가 정리된 뒤 과제 branch로 이동합니다. 기본 API 호출이 확인되면 `projects/{GITHUB_ID}/` 폴더 안에서 `IDEA.md`와 `app.py`를 완성합니다.
-
-프로토타입 화면에만 필요한 Streamlit은 이 시점에 설치합니다.
-
-```bash
-python -m pip install -r requirements-prototype.txt
-```
 
 `IDEA.md`에는 만들고 싶은 것을 한두 문장으로 적습니다. 예를 들어 “사용자가 적은 여행 취향을 받아 1일 여행 코스를 추천해 주는 서비스”처럼 시작하면 됩니다.
 
