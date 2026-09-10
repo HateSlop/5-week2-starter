@@ -27,8 +27,6 @@ git switch -c assignment-{GITHUB_ID}
 
 ```text
 .
-├── .github/
-│   └── pull_request_template.md
 ├── projects/
 │   ├── README.md
 │   └── {GITHUB_ID}/           # 과제에서 새로 만듦
@@ -86,14 +84,15 @@ Antigravity에서 저장소 폴더를 열고 아래처럼 요청합니다.
 
 ```text
 projects/{GITHUB_ID}/IDEA.md를 읽고,
-이 폴더 안에 간단한 Streamlit AI 프로토타입을 만들어 주세요.
+이 폴더 안에 간단한 대화형 AI 프로토타입을 만들어 주세요.
+`python projects/{GITHUB_ID}/app.py`로 실행할 수 있어야 합니다.
 API Key는 프로젝트 최상위의 .env에서만 읽고 코드에 넣지 마세요.
 ```
 
 완성 뒤에는 직접 실행합니다.
 
 ```bash
-streamlit run projects/{GITHUB_ID}/app.py
+python projects/{GITHUB_ID}/app.py
 ```
 
 변경 내용을 확인한 뒤 `projects/{GITHUB_ID}`를 Commit하고 아래처럼 과제 branch를 Push합니다.
