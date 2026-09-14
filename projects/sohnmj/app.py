@@ -1,50 +1,64 @@
 import os
-from pathlib import Path
-
+import sys
 from dotenv import load_dotenv
 from openai import OpenAI
 
 
-# 프로젝트 최상위 .env 파일 로드
-root_env_path = Path(__file__).resolve().parents[2] / ".env"
-load_dotenv(dotenv_path=root_env_path, override=True)
+def main() -> None:
+    # 프로젝트 루트의 .env 파일 로드
+    load_dotenv()
 
-api_key = os.getenv("OPENAI_API_KEY")
-model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    api_key = os.getenv("OPENAI_API_KEY")
+    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
-if not api_key:
-    raise SystemExit(
-        "OPENAI_API_KEY가 없습니다. 프로젝트 최상위의 .env 파일을 확인하세요."
+    if not api_key:
+        print("오류: OPENAI_API_KEY가 없습니다. 루트 .env 파일을 확인하세요.")
+        sys.exit(1)
+
+    client = OpenAI(api_key=api_key)
+
+    instructions = (
+        "당신은 배틀그라운드(PUBG) 이스포츠 전문 AI 어시스턴트입니다.\n"
+        "국내 대회(PWS) 및 글로벌 대회(PGS, PNC, PGC 등)의 경기 일정, 진행 방식, 결과 브리핑, 주요 소식을 안내합니다.\n"
+        "사용자의 질문에 맞춰 핵심 정보를 200토큰 이내로 명확하고 간결하게 답변하세요."
     )
 
-print("=== 배틀그라운드(PUBG) e스포츠 대회 일정 안내 도우미 ===")
-print("궁금한 배그 대회 일정이나 현재 진행 중인 경기 일정을 물어보세요.")
-question = input("\n질문 입력: ").strip()
+    print("=" * 60)
+    print("  PUBG 이스포츠 안내 AI (PWS, PGS, PNC, PGC 일정/결과)")
+    print("=" * 60)
+    print("대화를 종료하려면 'q' 또는 '종료'를 입력하세요.\n")
 
-if not question:
-    raise SystemExit("입력이 비어 있어 API를 호출하지 않았습니다.")
+    while True:
+        try:
+            user_input = input("[질문 입력] > ").strip().lstrip("\ufeff")
+        except (KeyboardInterrupt, EOFError):
+            print("\n프로그램을 종료합니다.")
+            break
 
-client = OpenAI(api_key=api_key)
+        if not user_input:
+            print("입력이 비어 있습니다. 질문을 입력해 주세요.")
+            continue
 
-instructions = (
-    "당신은 배틀그라운드(PUBG) e스포츠 대회 일정 안내 도우미입니다. "
-    "사용자가 묻는 배틀그라운드 대회(PWS, PGS, PGC 등) 일정을 친절하게 안내하세요. "
-    "만약 진행 중인 대회나 예정된 일정이 없다면 반드시 일정이 없다고 솔직하게 알려주세요."
-)
-try:
-    response = client.responses.create(
-        model=model,
-        instructions=instructions,
-        input=question,
-        max_output_tokens=180,
-    )
-    print("\n[AI 응답]")
-    print(response.output_text)
-except Exception as e:
-    import traceback
-    print("\n--- [실제 발생한 에러 상세 내용] ---")
-    traceback.print_exc()
-    print("------------------------------------\n")
-    raise SystemExit(
-        "OpenAI API 호출에 실패했습니다. 최상위 .env의 OPENAI_API_KEY와 설정을 확인해 주세요."
-    )
+        if user_input.lower() in ("q", "quit", "exit", "종료"):
+            print("이용해 주셔서 감사합니다. 대화를 종료합니다.")
+            break
+
+        print("\nAI가 답변을 확인 중입니다...")
+
+        try:
+            response = client.responses.create(
+                model=model,
+                instructions=instructions,
+                input=user_input,
+                max_output_tokens=200,
+            )
+            print("\n[AI 응답]")
+            print(response.output_text)
+            print("-" * 60)
+        except Exception as error:
+            print(f"\n요청 처리 중 오류가 발생했습니다: {type(error).__name__}")
+            print("-" * 60)
+
+
+if __name__ == "__main__":
+    main()
